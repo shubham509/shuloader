@@ -1,0 +1,64 @@
+var express	=	require("express");
+var multer	=	require('multer');
+var app	=	express();
+var storage	=	multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '.' + 'jpg');
+  }
+});
+var upload = multer({ storage : storage}).single('a');
+
+app.use(express.static(__dirname + '/public'));
+const testFolder = './public/';
+const fs = require('fs');
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+	});
+})
+
+var storage	=	multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '.' + 'pdf');
+  }
+});
+var upload = multer({ storage : storage}).single('b');
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+	});
+})
+
+var storage	=	multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.fieldname + '.' + 'mp4');
+  }
+});
+var upload = multer({ storage : storage}).single('c');
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+	});
+})
+
+app.post('/api/photo',function(req,res){
+	upload(req,res,function(err) {
+		if(err) {
+			return res.end("Error uploading file.");
+		}
+		res.end("File is uploaded");
+	});
+});
+
+app.listen(3000,function(){
+    console.log("Working on port 3000");
+});

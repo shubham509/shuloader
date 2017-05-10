@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>File upload Node.</title>
+  </head>
+  <body>
+<fieldset>
+<legend><h1> Photos </h1></legend>
+      <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/api/photo"
+          method="post">
+      <input type="file" name="a" />
+      <input type="submit" value="Upload Image" name="submit">
+      <span id = "status"></span></br>
+      </form>
+      </br>
+      <a href="downloads.html" name="downloads" />
+      <form method="get" action="a.jpg">
+      <button type="submit">Download!</button>
+      </form>
+</fieldset></br>
+
+<fieldset>
+<legend><h1> PDFs </h1></legend>
+      <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/api/photo"
+          method="post">
+      <input type="file" name="b" />
+      <input type="submit" value="Upload Pdf" name="submit">
+      <span id = "status"></span></br>
+      </form>
+      </br>
+      <a href="downloads.html" name="downloads" />
+      <form method="get" action="b.pdf">
+      <button type="submit">Download!</button>
+      </form>
+</fieldset></br>
+
+<fieldset>
+<legend><h1> Videos </h1></legend>
+      <form id="uploadForm"
+          enctype="multipart/form-data"
+          action="/api/photo"
+          method="post">
+      <input type="file" name="c" />
+      <input type="submit" value="Upload Video" name="submit">
+      <span id = "status"></span></br>
+      </form>
+      </br>
+      <a href="downloads.html" name="downloads" />
+      <form method="get" action="c.mp4">
+      <button type="submit">Download!</button>
+      </form>
+</fieldset></br>
+
+  </body>
+  <script>
+  $(document).ready(function() {
+
+     $('#uploadForm').submit(function() {
+		 $("#status").empty().text("File is uploading...");
+
+        $(this).ajaxSubmit({
+
+            error: function(xhr) {
+		            status('Error: ' + xhr.status);
+            },
+
+            success: function(response) {
+					console.log(response)
+					$("#status").empty().text(response);
+            }
+	});
+
+	return false;
+    });
+});
+  </script>
+
+
+
+
+
+</html>
